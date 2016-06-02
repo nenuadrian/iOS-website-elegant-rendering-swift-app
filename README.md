@@ -9,6 +9,9 @@ An experiment to get used with auto-constraints, Swift and back and forth callba
   * Swipe to the right for BACK and to the left for FORWARD
   * Works in all orientations thanks to auto-constraints + the website being nicely mobile compatible
 
+# How to use
+Simply change the URL in ViewController.swift and update the icons and logos in the Assets manager. For more complex behaviour, take a quick look at Test/index.html and at the code in the ViewController to quickly setup JS communication between the app and the website and send anything from Geolocation data to user input.
+
 # Small test
   To test the JS callbacks between the app and a site, the Test/index.html file can be uploaded to a host and accessed.
 
