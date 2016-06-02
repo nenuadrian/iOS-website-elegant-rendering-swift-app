@@ -12,16 +12,18 @@
 		D683CAD61CFF65FF0045BF1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D683CAD41CFF65FF0045BF1C /* Main.storyboard */; };
 		D683CAD81CFF65FF0045BF1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D683CAD71CFF65FF0045BF1C /* Assets.xcassets */; };
 		D683CADB1CFF65FF0045BF1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D683CAD91CFF65FF0045BF1C /* LaunchScreen.storyboard */; };
+		D6E394691CFFB6950070E8AA /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = D6E394681CFFB6950070E8AA /* index.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D683CACD1CFF65FF0045BF1C /* Secret Republic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Secret Republic.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D683CACD1CFF65FF0045BF1C /* Elegant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Elegant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D683CAD01CFF65FF0045BF1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D683CAD21CFF65FF0045BF1C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D683CAD51CFF65FF0045BF1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D683CAD71CFF65FF0045BF1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D683CADA1CFF65FF0045BF1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D683CADC1CFF65FF0045BF1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6E394681CFFB6950070E8AA /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +40,7 @@
 		D683CAC41CFF65FF0045BF1C = {
 			isa = PBXGroup;
 			children = (
-				D683CACF1CFF65FF0045BF1C /* Secret Republic */,
+				D683CACF1CFF65FF0045BF1C /* ElegantWebsiteRenderer */,
 				D683CACE1CFF65FF0045BF1C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,14 +48,15 @@
 		D683CACE1CFF65FF0045BF1C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D683CACD1CFF65FF0045BF1C /* Secret Republic.app */,
+				D683CACD1CFF65FF0045BF1C /* Elegant.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D683CACF1CFF65FF0045BF1C /* Secret Republic */ = {
+		D683CACF1CFF65FF0045BF1C /* ElegantWebsiteRenderer */ = {
 			isa = PBXGroup;
 			children = (
+				D6E394671CFFB6840070E8AA /* Test */,
 				D683CAD01CFF65FF0045BF1C /* AppDelegate.swift */,
 				D683CAD21CFF65FF0045BF1C /* ViewController.swift */,
 				D683CAD41CFF65FF0045BF1C /* Main.storyboard */,
@@ -61,16 +64,24 @@
 				D683CAD91CFF65FF0045BF1C /* LaunchScreen.storyboard */,
 				D683CADC1CFF65FF0045BF1C /* Info.plist */,
 			);
-			name = "Secret Republic";
+			name = ElegantWebsiteRenderer;
 			path = MobileApp;
+			sourceTree = "<group>";
+		};
+		D6E394671CFFB6840070E8AA /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				D6E394681CFFB6950070E8AA /* index.html */,
+			);
+			name = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D683CACC1CFF65FF0045BF1C /* Secret Republic */ = {
+		D683CACC1CFF65FF0045BF1C /* Elegant */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D683CADF1CFF65FF0045BF1C /* Build configuration list for PBXNativeTarget "Secret Republic" */;
+			buildConfigurationList = D683CADF1CFF65FF0045BF1C /* Build configuration list for PBXNativeTarget "Elegant" */;
 			buildPhases = (
 				D683CAC91CFF65FF0045BF1C /* Sources */,
 				D683CACA1CFF65FF0045BF1C /* Frameworks */,
@@ -80,9 +91,9 @@
 			);
 			dependencies = (
 			);
-			name = "Secret Republic";
+			name = Elegant;
 			productName = MobileApp;
-			productReference = D683CACD1CFF65FF0045BF1C /* Secret Republic.app */;
+			productReference = D683CACD1CFF65FF0045BF1C /* Elegant.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -101,7 +112,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D683CAC81CFF65FF0045BF1C /* Build configuration list for PBXProject "Secret Republic" */;
+			buildConfigurationList = D683CAC81CFF65FF0045BF1C /* Build configuration list for PBXProject "Elegant" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -114,7 +125,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D683CACC1CFF65FF0045BF1C /* Secret Republic */,
+				D683CACC1CFF65FF0045BF1C /* Elegant */,
 			);
 		};
 /* End PBXProject section */
@@ -125,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D683CADB1CFF65FF0045BF1C /* LaunchScreen.storyboard in Resources */,
+				D6E394691CFFB6950070E8AA /* index.html in Resources */,
 				D683CAD81CFF65FF0045BF1C /* Assets.xcassets in Resources */,
 				D683CAD61CFF65FF0045BF1C /* Main.storyboard in Resources */,
 			);
@@ -255,8 +267,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MobileApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Mydeveloper.SecretRepublic;
-				PRODUCT_NAME = "Secret Republic";
+				PRODUCT_BUNDLE_IDENTIFIER = Mydeveloper.Elegant;
+				PRODUCT_NAME = Elegant;
 			};
 			name = Debug;
 		};
@@ -266,15 +278,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MobileApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Mydeveloper.SecretRepublic;
-				PRODUCT_NAME = "Secret Republic";
+				PRODUCT_BUNDLE_IDENTIFIER = Mydeveloper.Elegant;
+				PRODUCT_NAME = Elegant;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D683CAC81CFF65FF0045BF1C /* Build configuration list for PBXProject "Secret Republic" */ = {
+		D683CAC81CFF65FF0045BF1C /* Build configuration list for PBXProject "Elegant" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D683CADD1CFF65FF0045BF1C /* Debug */,
@@ -283,7 +295,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D683CADF1CFF65FF0045BF1C /* Build configuration list for PBXNativeTarget "Secret Republic" */ = {
+		D683CADF1CFF65FF0045BF1C /* Build configuration list for PBXNativeTarget "Elegant" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D683CAE01CFF65FF0045BF1C /* Debug */,

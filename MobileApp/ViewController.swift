@@ -3,10 +3,7 @@ import WebKit
 
 
 class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
-    let website = "http://nenuadrian.com/app"
-    var webViewLoads_ = 0
-    var lastWebViewLoad = 0.0
-
+    let website = "http://secretrepublic.net"
     @IBOutlet weak var logoImage: UIImageView?
     @IBOutlet weak var loadingOverlay:UIView?
     var wkWebView: WKWebView?
