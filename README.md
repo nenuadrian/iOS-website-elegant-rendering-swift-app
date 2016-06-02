@@ -1,5 +1,5 @@
 # iOS app for elegant rendering of mobile-friendly websites
-An elegant iOS app for rendering websites efficiently with JS callback implementation and elegant loading screen.
+An elegant iOS app for rendering websites efficiently with JS callback implementation and fancy loading screen.
 
 An experiment to get used with auto-constraints, Swift and back and forth callbacks between WKWebView (after initially using an UIWebView) and JS.
 
