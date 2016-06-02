@@ -5,15 +5,13 @@ import WebKit
 class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
     let website = "http://secretrepublic.net"
     @IBOutlet weak var logoImage: UIImageView?
-    @IBOutlet weak var loadingOverlay:UIView?
+    @IBOutlet weak var loadingOverlay: UIView?
     var wkWebView: WKWebView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let theConfiguration = WKWebViewConfiguration()
-        
-        /* JS */
         theConfiguration.userContentController.addScriptMessageHandler(self, name: "interOp")
 
         wkWebView = WKWebView(frame: self.view.frame,
@@ -28,14 +26,9 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         wkWebView!.translatesAutoresizingMaskIntoConstraints = false
         wkWebView!.navigationDelegate = self
         
-        logoImage!.alpha = 0
-        loadingOverlay!.addSubview(logoImage!)
-        
-        self.view.addSubview(loadingOverlay!)
         animateLogo()
         
         wkWebView!.loadRequest(NSURLRequest(URL: NSURL(string: website)!))
-        
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture(_:)))
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right
@@ -45,18 +38,17 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
         self.view.addGestureRecognizer(swipeLeft)
     }
-     /* JS */
+    /* JS CALLBACK */
     func runJsOnPage(js: String) {
         self.wkWebView!.evaluateJavaScript(js, completionHandler: nil)
     }
-    /* JS */
+
     func userContentController(userContentController:
-        WKUserContentController,
-                               didReceiveScriptMessage message: WKScriptMessage) {
+        WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
         let sentData = message.body as! NSDictionary
-        
         runJsOnPage("callFromApp('\(sentData["message"]!)');")
     }
+    /* // END JS CALLBACK HANDLING */
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
