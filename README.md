@@ -16,8 +16,9 @@ Simply change the URL in ViewController.swift and update the icons and logos in 
 Make sure your website is mobile responsive & lets browser know it.
 
 e.g.
+<pre>
 <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.8, minimum-scale=0.9, user-scalable=no">
-
+</pre>
 
 # Small test
   To test the JS callbacks between the app and a site, the Test/index.html file can be uploaded to a host and accessed.
