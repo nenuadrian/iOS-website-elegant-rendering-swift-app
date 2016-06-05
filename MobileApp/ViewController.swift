@@ -3,7 +3,7 @@ import WebKit
 
 
 class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
-    let website = "http://secretrepublic.net"
+    let website = "http://youtube.com"
     
     var wkWebView: WKWebView?
     var lastUrl: NSURL?

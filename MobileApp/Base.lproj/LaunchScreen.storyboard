@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="FDj-WM-nLB">
-                                <rect key="frame" x="0.0" y="49" width="600" height="501"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-art2" translatesAutoresizingMaskIntoConstraints="NO" id="FDj-WM-nLB">
+                                <rect key="frame" x="129.5" y="179.5" width="341" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="305" id="qwt-8k-Ytu"/>
                                 </constraints>
@@ -29,7 +29,7 @@
                                 </variation>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.097342659249563646" green="0.097342659249563646" blue="0.097342659249563646" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.95714350451057773" green="0.94384247470560523" blue="0.96423020287958117" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="FDj-WM-nLB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Omg-0d-9Ru"/>
                             <constraint firstItem="FDj-WM-nLB" firstAttribute="width" relation="lessThanOrEqual" secondItem="Ze5-6b-2t3" secondAttribute="width" id="Rf3-vq-jgh"/>
@@ -43,6 +43,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="482" height="482"/>
+        <image name="logo-art2" width="341" height="240"/>
     </resources>
 </document>
