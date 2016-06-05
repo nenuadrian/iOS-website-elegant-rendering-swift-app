@@ -4,9 +4,12 @@ import WebKit
 
 class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
     let website = "http://secretrepublic.net"
+    
+    var wkWebView: WKWebView?
+    var lastUrl: NSURL?
+    
     @IBOutlet weak var logoImage: UIImageView?
     @IBOutlet weak var loadingOverlay: UIView?
-    var wkWebView: WKWebView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,17 +41,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
         self.view.addGestureRecognizer(swipeLeft)
     }
-    /* JS CALLBACK */
-    func runJsOnPage(js: String) {
-        self.wkWebView!.evaluateJavaScript(js, completionHandler: nil)
-    }
-
-    func userContentController(userContentController:
-        WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
-        let sentData = message.body as! NSDictionary
-        runJsOnPage("callFromApp('\(sentData["message"]!)');")
-    }
-    /* // END JS CALLBACK HANDLING */
+    
     
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
@@ -83,12 +76,48 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         fadeLogoIn()
     }
     
+    /* JS CALLBACK */
+    func runJsOnPage(js: String) {
+        self.wkWebView!.evaluateJavaScript(js, completionHandler: nil)
+    }
+    
+    func userContentController(userContentController:
+        WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+        let sentData = message.body as! NSDictionary
+        runJsOnPage("callFromApp('\(sentData["message"]!)');")
+    }
+    /* // END JS CALLBACK HANDLING */
+    
     func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        if let url = webView.URL {
+            lastUrl = url
+        }
         UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
             self.loadingOverlay!.alpha = 1.0
             }, completion: nil)
     }
     
+    func handleError(webView: WKWebView, error: NSError) {
+        let alert = UIAlertController(title: "Issue detected", message: "We are sorry, but: \(error.localizedDescription)", preferredStyle: UIAlertControllerStyle.Alert)
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+        alert.addAction(UIAlertAction(title: "RETRY", style: .Default, handler: { action in
+            switch action.style{
+                case .Default:
+                    webView.loadRequest(NSURLRequest(URL: self.lastUrl!))
+                default:
+                    return
+            }
+        }))
+    }
+    
+    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
+        handleError(webView, error: error)
+    }
+    
+    func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
+        handleError(webView, error: error)
+    }
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         /* JS */
         runJsOnPage("loadedFromApp()")
