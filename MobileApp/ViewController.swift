@@ -3,11 +3,12 @@ import WebKit
 
 
 class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
-    let website = "http://youtube.com"
+    let website = "http://alpha.secretrepublic.net"
     
     var wkWebView: WKWebView?
-    var lastUrl: NSURL?
+    var lastUrl: URL?
     
+    @IBOutlet weak var backgroundImage: UIImageView?
     @IBOutlet weak var logoImage: UIImageView?
     @IBOutlet weak var loadingOverlay: UIView?
     
@@ -15,15 +16,15 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         super.viewDidLoad()
         
         let theConfiguration = WKWebViewConfiguration()
-        theConfiguration.userContentController.addScriptMessageHandler(self, name: "interOp")
+        theConfiguration.userContentController.add(self, name: "interOp")
 
         wkWebView = WKWebView(frame: self.view.frame,
                                configuration: theConfiguration)
         self.view.addSubview(wkWebView!)
-        self.view.bringSubviewToFront(loadingOverlay!)
+        self.view.bringSubview(toFront: loadingOverlay!)
         
-        self.view.addConstraint(NSLayoutConstraint(item: self.wkWebView!, attribute: .Height, relatedBy: .Equal, toItem: self.view, attribute: .Height, multiplier: 1, constant: 0))
-        self.view.addConstraint(NSLayoutConstraint(item: self.wkWebView!, attribute: .Width, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: self.wkWebView!, attribute: .height, relatedBy: .equal, toItem: self.view, attribute: .height, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: self.wkWebView!, attribute: .width, relatedBy: .equal, toItem: self.view, attribute: .width, multiplier: 1, constant: 0))
         
         wkWebView!.scrollView.bounces = false
         wkWebView!.translatesAutoresizingMaskIntoConstraints = false
@@ -31,26 +32,26 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         
         animateLogo()
         
-        wkWebView!.loadRequest(NSURLRequest(URL: NSURL(string: website)!))
+        wkWebView!.load(URLRequest(url: URL(string: website)!))
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture(_:)))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(swipeRight)
     
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture(_:)))
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeLeft)
     }
     
     
-    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+    func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.Left:
+            case UISwipeGestureRecognizerDirection.left:
                 if (wkWebView!.canGoForward) {
                     wkWebView!.goForward()
                 }
-            case UISwipeGestureRecognizerDirection.Right:
+            case UISwipeGestureRecognizerDirection.right:
                 if (wkWebView!.canGoBack) {
                     wkWebView!.goBack()
                 }
@@ -60,14 +61,14 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         }
     }
     
-    func fadeLogoIn(test: Bool = true) {
-        UIView.animateWithDuration(1.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+    func fadeLogoIn(_ test: Bool = true) {
+        UIView.animate(withDuration: 1.5, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.logoImage!.alpha = 1.0
             }, completion: self.fadeLogoOut)
     }
     
-    func fadeLogoOut(test: Bool = true) {
-        UIView.animateWithDuration(1.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+    func fadeLogoOut(_ test: Bool = true) {
+        UIView.animate(withDuration: 1.5, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.logoImage!.alpha = 0.1
             }, completion: self.fadeLogoIn)
     }
@@ -77,51 +78,51 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
     }
     
     /* JS CALLBACK */
-    func runJsOnPage(js: String) {
+    func runJsOnPage(_ js: String) {
         self.wkWebView!.evaluateJavaScript(js, completionHandler: nil)
     }
     
-    func userContentController(userContentController:
-        WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+    func userContentController(_ userContentController:
+        WKUserContentController, didReceive message: WKScriptMessage) {
         let sentData = message.body as! NSDictionary
         runJsOnPage("callFromApp('\(sentData["message"]!)');")
     }
     /* // END JS CALLBACK HANDLING */
     
-    func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        if let url = webView.URL {
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        if let url = webView.url {
             lastUrl = url
         }
-        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.loadingOverlay!.alpha = 1.0
             }, completion: nil)
     }
     
-    func handleError(webView: WKWebView, error: NSError) {
-        let alert = UIAlertController(title: "Issue detected", message: "We are sorry, but: \(error.localizedDescription)", preferredStyle: UIAlertControllerStyle.Alert)
-        self.presentViewController(alert, animated: true, completion: nil)
+    func handleError(_ webView: WKWebView, error: NSError) {
+        let alert = UIAlertController(title: "Issue detected", message: "We are sorry, but: \(error.localizedDescription)", preferredStyle: UIAlertControllerStyle.alert)
+        self.present(alert, animated: true, completion: nil)
         
-        alert.addAction(UIAlertAction(title: "RETRY", style: .Default, handler: { action in
+        alert.addAction(UIAlertAction(title: "RETRY", style: .default, handler: { action in
             switch action.style{
-                case .Default:
-                    webView.loadRequest(NSURLRequest(URL: self.lastUrl!))
+                case .default:
+                    webView.load(URLRequest(url: self.lastUrl!))
                 default:
                     return
             }
         }))
     }
     
-    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
-        handleError(webView, error: error)
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        handleError(webView, error: error as NSError)
     }
     
-    func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
-        handleError(webView, error: error)
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        handleError(webView, error: error as NSError)
     }
-    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         /* JS */
         runJsOnPage("loadedFromApp()")
-        UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.loadingOverlay!.alpha = 0.0
             
             }, completion: nil)

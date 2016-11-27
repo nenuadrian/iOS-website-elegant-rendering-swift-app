@@ -109,6 +109,7 @@
 					D683CACC1CFF65FF0045BF1C = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 28AS6B884R;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -269,6 +270,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Mydeveloper.Elegant;
 				PRODUCT_NAME = Elegant;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -280,6 +282,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Mydeveloper.Elegant;
 				PRODUCT_NAME = Elegant;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
