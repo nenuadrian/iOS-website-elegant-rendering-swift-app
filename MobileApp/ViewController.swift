@@ -1,11 +1,20 @@
 import UIKit
 import WebKit
 
-
-class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
-    let website = "http://alpha.secretrepublic.net"
+class CustomWebView: WKWebView {
+    override func load(_ request: URLRequest) -> WKNavigation? {
+        var request = request
+        request.setValue("iOS;" + UIDevice.current.identifierForVendor!.uuidString  + ";" + (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String), forHTTPHeaderField: "In-App")
+        let request2 = request as URLRequest
+        return super.load(request2)
+     }
     
-    var wkWebView: WKWebView?
+   }
+
+class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler, WKUIDelegate {
+    let website = "http://alpha.sesdfcretrepublic.net"
+    
+    var wkWebView: CustomWebView?
     var lastUrl: URL?
     
     @IBOutlet weak var backgroundImage: UIImageView?
@@ -18,7 +27,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         let theConfiguration = WKWebViewConfiguration()
         theConfiguration.userContentController.add(self, name: "interOp")
 
-        wkWebView = WKWebView(frame: self.view.frame,
+        wkWebView = CustomWebView(frame: self.view.frame,
                                configuration: theConfiguration)
         self.view.addSubview(wkWebView!)
         self.view.bringSubview(toFront: loadingOverlay!)
@@ -29,7 +38,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         wkWebView!.scrollView.bounces = false
         wkWebView!.translatesAutoresizingMaskIntoConstraints = false
         wkWebView!.navigationDelegate = self
-        
+        wkWebView?.uiDelegate = self
         animateLogo()
         
         wkWebView!.load(URLRequest(url: URL(string: website)!))
@@ -60,6 +69,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
             }
         }
     }
+    
     
     func fadeLogoIn(_ test: Bool = true) {
         UIView.animate(withDuration: 1.5, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
@@ -99,10 +109,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
     }
     
     func handleError(_ webView: WKWebView, error: NSError) {
-        let alert = UIAlertController(title: "Issue detected", message: "We are sorry, but: \(error.localizedDescription)", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Ooops! System error", message: "We are sorry, but \(error.localizedDescription)", preferredStyle: UIAlertControllerStyle.alert)
         self.present(alert, animated: true, completion: nil)
         
-        alert.addAction(UIAlertAction(title: "RETRY", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Retry?", style: .default, handler: { action in
             switch action.style{
                 case .default:
                     webView.load(URLRequest(url: self.lastUrl!))
@@ -127,5 +137,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
             
             }, completion: nil)
     }
+    
+    
 }
 
