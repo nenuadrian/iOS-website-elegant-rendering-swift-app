@@ -12,7 +12,7 @@ class CustomWebView: WKWebView {
    }
 
 class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler, WKUIDelegate {
-    let website = "http://alpha.sesdfcretrepublic.net"
+    let website = "http://alpha.secretrepublic.net"
     
     var wkWebView: CustomWebView?
     var lastUrl: URL?
@@ -26,7 +26,8 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         
         let theConfiguration = WKWebViewConfiguration()
         theConfiguration.userContentController.add(self, name: "interOp")
-
+        theConfiguration.mediaPlaybackRequiresUserAction = false
+        theConfiguration.requiresUserActionForMediaPlayback = false
         wkWebView = CustomWebView(frame: self.view.frame,
                                configuration: theConfiguration)
         self.view.addSubview(wkWebView!)
@@ -39,6 +40,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
         wkWebView!.translatesAutoresizingMaskIntoConstraints = false
         wkWebView!.navigationDelegate = self
         wkWebView?.uiDelegate = self
+
         animateLogo()
         
         wkWebView!.load(URLRequest(url: URL(string: website)!))
@@ -132,7 +134,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHan
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         /* JS */
         runJsOnPage("loadedFromApp()")
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.1, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.loadingOverlay!.alpha = 0.0
             
             }, completion: nil)
