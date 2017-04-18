@@ -13,7 +13,7 @@ An experiment to get used with auto-constraints, Swift and back and forth callba
 Simply change the URL in ViewController.swift and update the icons and logos in the Assets manager. For more complex behaviour, take a quick look at Test/index.html and at the code in the ViewController to quickly setup JS communication between the app and the website and send anything from Geolocation data to user input.
 
 ## Prepare your website
-Make sure your website is mobile responsive & lets browser know it.
+Make sure your website is mobile responsive & let the browser know it.
 
 ```
 <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.8, minimum-scale=0.9, user-scalable=no">
